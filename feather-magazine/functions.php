@@ -405,6 +405,25 @@ function feather_magazine_fonts_url() {
   }
   add_action( 'wp_enqueue_scripts', 'feather_magazine_scripts_styles' );
 
+
+
+/**
+ * Fix editor font after WP 7.0.
+ */
+function feather_magazine_editor_font_fix() {
+  wp_add_inline_style(
+    'feather-magazine-fonts',
+    '
+    body,
+    .editor-styles-wrapper {
+      font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    '
+  );
+}
+add_action( 'enqueue_block_assets', 'feather_magazine_scripts_styles' );
+add_action( 'enqueue_block_assets', 'feather_magazine_editor_font_fix', 20 );
+
 /**
  * WP Mega Menu Plugin Support
  */
